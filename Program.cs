@@ -59,32 +59,27 @@
                 }
                 else if (command == "delete")
                 {
+                    string s, e;
                     if (argument.Length == 3)
                     {
-                        int index = -1;
-                        for (int entries = 0; entries < dictionary.Count; entries++) {
-                            SweEngGloss gloss = dictionary[entries];
-                            if (gloss.word_swe == argument[1] && gloss.word_eng == argument[2])
-                                index = entries;
-                        }
-                        dictionary.RemoveAt(index);
+                        s = argument[1];
+                        e = argument[2];
                     }
-                    else if (argument.Length == 1)
+                    else
                     {
                         Console.WriteLine("Write word in Swedish: ");
-                        string s = Console.ReadLine();
+                        s = Console.ReadLine();
                         Console.Write("Write word in English: ");
-                        string e = Console.ReadLine();
-                        int index = -1;
-                        for (int entries = 0; entries < dictionary.Count; entries++)
-                        {
-                            SweEngGloss gloss = dictionary[entries];
-                            if (gloss.word_swe == s && gloss.word_eng == e)
-                                index = entries;
-                        }
+                        e = Console.ReadLine();
+                    }
+
+                    int index = FindIndex(s, e);
+                    if (index != -1)
+                    {
                         dictionary.RemoveAt(index);
                     }
                 }
+
                 else if (command == "translate")
                 {
                     if (argument.Length == 2)
@@ -130,6 +125,16 @@
                     line = sr.ReadLine();
                 }
             }
+        }
+        private static int FindIndex(string s, string e)
+        {
+            for (int entries = 0; entries < dictionary.Count; entries++)
+            {
+                SweEngGloss gloss = dictionary[entries];
+                if (gloss.word_swe == s && gloss.word_eng == e)
+                    return entries;
+            }
+            return -1;
         }
     }
 }
