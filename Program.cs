@@ -87,10 +87,10 @@
                     if (argument.Length == 3)
                     {
                         int index = -1;
-                        for (int i = 0; i < dictionary.Count; i++) {
-                            SweEngGloss gloss = dictionary[i];
+                        for (int entries = 0; entries < dictionary.Count; entries++) {
+                            SweEngGloss gloss = dictionary[entries];
                             if (gloss.word_swe == argument[1] && gloss.word_eng == argument[2])
-                                index = i;
+                                index = entries;
                         }
                         dictionary.RemoveAt(index);
                     }
@@ -101,11 +101,11 @@
                         Console.Write("Write word in English: ");
                         string e = Console.ReadLine();
                         int index = -1;
-                        for (int i = 0; i < dictionary.Count; i++)
+                        for (int entries = 0; entries < dictionary.Count; entries++)
                         {
-                            SweEngGloss gloss = dictionary[i];
+                            SweEngGloss gloss = dictionary[entries];
                             if (gloss.word_swe == s && gloss.word_eng == e)
-                                index = i;
+                                index = entries;
                         }
                         dictionary.RemoveAt(index);
                     }
